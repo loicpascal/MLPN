@@ -1,0 +1,301 @@
+@font-face {
+    font-family: "Font Awesome 5 Solid";
+    src: url("fontawesome/webfonts/fa-solid-900.eot");
+    src: url("fontawesome/webfonts/fa-solid-900.woff2") format("woff2"),
+        url("fontawesome/webfonts/fa-solid-900.ttf") format("truetype"),
+        url("fontawesome/webfonts/fa-solid-900.woff") format("woff"),
+        url("fontawesome/webfonts/fa-solid-900.svg") format("svg");
+}
+
+@font-face {
+    font-family: "Montserrat Regular";
+    src: url("font/Montserrat/Montserrat-Regular.ttf") format("truetype");
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+    font-family : "Montserrat Regular", sans-serif;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+body > .container {
+    padding: 100px 15px 20px;
+    margin-bottom: 40px;
+}
+
+main, .row {
+    z-index: 3;
+}
+
+.listeCadeau > h5 {
+    color: rgb(172, 149, 136);
+}
+
+h1 > .badge {
+    font-size: 50%;
+    vertical-align: 6px;
+}
+
+#logo {
+    height: 50px;
+    margin-right: 20px;
+}
+
+#logoFooter {
+    height: 20px;
+    vertical-align: baseline;
+}
+
+.innerContainer {
+    margin: 10px 0;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #baaca4;
+    line-height: 50px;
+}
+
+.footer .text-right {
+    float: right;
+}
+
+.footer a {
+    color: #fef3ed;
+}
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+.footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+h1 {
+    margin-bottom: 2rem;
+}
+
+.table .thead-dark th {
+    background: #baaca4;
+    border-color: #baaca4;
+}
+
+/**
+ * NAVIGATION - MENU
+ */
+.bg-dark {
+    background-color: #214517 !important;
+}
+
+.dropdown-menu {
+    background: #214517;
+    color: rgba(255,255,255,.5);
+}
+
+.dropdown-item {
+    color: rgba(255,255,255,.5);
+}
+
+/**
+ * Fil d'Ariane
+ */
+.breadcrumb {
+    background: none;
+    padding: .75rem 0;
+}
+
+.card {
+    border-radius: 1.5rem;
+    box-shadow: 0 3px 6px 1px rgba(0,0,0,0.12);
+    border: none;
+}
+
+.card-header:first-child {
+    border-radius: 1.5rem 1.5rem 0 0;
+}
+
+.card .card-body .text-muted {
+    margin-bottom: 0;
+}
+
+.modal-content {
+    border: none;
+    border-radius: 1.5rem;
+    padding: 0.3rem 1rem;
+}
+
+.modal-content .modal-header {
+    border-bottom: none;
+}
+.modal-content .modal-footer {
+    border-top: none;
+}
+
+/**
+ * BOUTONS
+ */
+.btn {
+    border-radius: 5rem;
+    padding: .5rem 1rem;
+}
+
+.btn-primary {
+    background-color: #e5ac9d;
+    border-color: #e5ac9d;
+}
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus {
+    background-color: #c07a68;
+    border-color: #c07a68;
+}
+
+.btn-info {
+    background-color: #9caf9f;
+    border-color: #9caf9f;
+}
+.btn-info:hover,
+.btn-info:active,
+.btn-info:focus {
+    background-color: #78947d;
+    border-color: #78947d;
+}
+
+.btn-danger {
+    background-color: #c62f2d;
+    border-color: #c62f2d;
+}
+.btn-danger:hover,
+.btn-danger:active,
+.btn-danger:focus,
+.btn-danger:visited {
+    background-color: #9f1a16;
+    border-color: #9f1a16;
+}
+
+/**
+ * LIENS
+ */
+a, .btn-link {
+    color: #e5ac9d;
+}
+
+a:hover, .btn-link:hover {
+    color: #c07a68;
+}
+
+/**
+ * BADGES
+ */
+.badge {
+    border-radius: 1rem;
+}
+
+.badge-primary {
+    background-color: #e5ac9d;
+}
+
+/* IDEA - List */
+.listeCadeau {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.listeCadeau .card {
+    width: 48%;
+    margin-bottom: 20px;
+}
+
+.listeCadeau .card .btn-danger {
+    padding: .5rem 0.8rem;
+    float: right;
+}
+
+a.external::before {
+    font-family: "Font Awesome 5 Solid";
+    content: "\f35d";
+    display: inline-block;
+    padding-right: 6px;
+    vertical-align: middle;
+    font-size: 0.9rem;
+}
+
+#countdown {
+    display: flex;
+    justify-content: center;
+}
+
+.compterebourDiv {
+    background: #baaca4;
+    color: #FFF;
+    padding: 0 0 10px 0;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.compterebour {
+    font-size: 3em;
+}
+
+.sapin {
+    height: 200px;
+    z-index: 1;
+    position: absolute;
+}
+
+img.cadeau {
+    float: left;
+    height: 20px;
+    margin-right: 10px;
+}
+
+img.cadeaux {
+    width: 100%;
+    margin-bottom: -34px;
+}
+
+.jumbotron {
+    margin-top: 20px;
+}
+
+code {
+    font-size: 80%;
+}
+
+.footer {
+    margin-bottom: 35px;
+    background-color: #214517
+}
+
+/*******************************************
+** MEDIA QUERIES
+ *******************************************/
+@media (max-width: 767.98px) {
+    #logo {
+        margin-right: 5px;
+    }
+
+    .listeCadeau .card {
+        width: 100%;
+        margin-bottom: 20px
+    }
+
+    .btn {
+        margin-bottom: 5px;
+    }
+
+    .footer span {
+        line-height: 30px;
+    }
+}

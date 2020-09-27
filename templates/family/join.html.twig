@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} Joindre une famille{% endblock %}
+{% block h1 %}Joindre une famille{% endblock %}
+
+{% block body %}
+
+<div>
+    {{ form_start(form) }}
+
+    <div class="form-group">
+        <div class="form-group col-md-6">
+            {{ form_label(form.code) }}
+            {{ form_errors(form.code) }}
+            {{ form_widget(form.code, {'attr' : {'class' : 'form-control'}}) }}
+        </div>
+
+        <div class="form-group col-md-6">
+            {{ form_widget(form.save, {'attr' : {'class' : 'btn btn-primary'}}) }}
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+
+</div>
+{% endblock %}
