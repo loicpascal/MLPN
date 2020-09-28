@@ -18,13 +18,13 @@
             <span>Vous n'avez aucune idée archivée.</span>
             {% else %}
             Vous n'avez aucune idée de cadeau.<br>
-            <a href="{{ path('idea_new') }}"><button type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i>&nbsp;Ajouter une idée</button></a>
+            <a href="{{ path('idea_new') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>&nbsp;Ajouter une idée</a>
             {% endif %}
         </p>
         {% else %}
 
         {% if archived is not defined %}
-        <a href="{{ path('idea_new') }}"><button type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i>&nbsp;Ajouter une idée</button></a>
+        <a href="{{ path('idea_new') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>&nbsp;Ajouter une idée</a>
         <br><br>
         {% endif %}
 
@@ -81,7 +81,7 @@
             {% endfor %}
         </div>
 
-        <a href="{{ path('idea_new') }}"><button type="button" class="btn btn-primary"><i class="fas fa-plus-circle"></i>&nbsp;Ajouter une idée</button></a>
+        <a href="{{ path('idea_new') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>&nbsp;Ajouter une idée</a>
 
         <button type="button" class="btn btn-link" data-toggle="modal" data-target="#deleteAllIdeas">Supprimer toutes mes idées</button>
 

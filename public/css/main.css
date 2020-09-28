@@ -155,9 +155,18 @@ h1 {
 }
 .btn-primary:hover,
 .btn-primary:active,
-.btn-primary:focus {
+.btn-primary:focus,
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active {
     background-color: #c07a68;
     border-color: #c07a68;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active:focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.btn-primary.focus,
+.btn-primary:focus {
+    box-shadow: 0 0 .1rem .1rem #c07a68;
 }
 
 .btn-info {
@@ -166,9 +175,16 @@ h1 {
 }
 .btn-info:hover,
 .btn-info:active,
-.btn-info:focus {
+.btn-info:focus,
+.btn-info:not(:disabled):not(.disabled).active,
+.btn-info:not(:disabled):not(.disabled):active {
     background-color: #78947d;
     border-color: #78947d;
+}
+
+.btn-info:not(:disabled):not(.disabled).active:focus,
+.btn-info:not(:disabled):not(.disabled):active:focus {
+    box-shadow: 0 0 .1rem .1rem #78947d;
 }
 
 .btn-danger {

@@ -1,0 +1,31 @@
+# PROTECT DIRECTORY BY PASSWORD
+AuthName "Cette page est protégée. Veuillez renseigner votre identifiant et votre mot de passe."
+AuthType Basic
+AuthUserFile ".htpasswd"
+Require valid-user
+
+# COMPRESS TEXT, HTML, JAVASCRIPT, CSS, XML
+#<IfModule mod_deflate.c>
+#    AddOutputFilterByType DEFLATE text/plain
+#    AddOutputFilterByType DEFLATE text/html
+#    AddOutputFilterByType DEFLATE text/xml
+#    AddOutputFilterByType DEFLATE text/css
+#    AddOutputFilterByType DEFLATE text/x-component
+#    AddOutputFilterByType DEFLATE application/xml
+#    AddOutputFilterByType DEFLATE application/xhtml+xml
+#    AddOutputFilterByType DEFLATE application/rss+xml
+#    AddOutputFilterByType DEFLATE application/javascript
+#    AddOutputFilterByType DEFLATE application/x-javascript
+#</IfModule>
+
+# PREVENT DIRECTORY LISTINGS
+#Options All -Indexes
+
+# REDIRECT NON-WWW TO WWW
+#RewriteCond %{HTTP_HOST} ^malettreauperenoel\.fr
+#RewriteRule (.*) http://www.malettreauperenoel.fr/$1 [R=301,L]
+
+# PREVENT HOTLINKING
+#RewriteCond %{HTTP_REFERER} !^
+#RewriteCond %{HTTP_REFERER} !^http://(www\.)?malettreauperenoel\.fr/ [nc]
+#RewriteRule .*\.(gif|jpg|png)$ http://www.malettreauperenoel.fr/img/hotlink_f_o.png [nc]

@@ -26,16 +26,17 @@
             <div class="card-body">
                 <p class="text-muted float-right">
                     <small>
-                        <span title="Créée le {{ family.date|date("d/m/Y") }}"><i class="fas fa-users"></i>&nbsp;{{ family.members|length }}&nbsp;{% if family.members|length <= 1 %}membre{% else %}membres{% endif %}</span>&nbsp;
+                        <span><i class="fas fa-users"></i>&nbsp;{{ family.members|length }}&nbsp;{% if family.members|length <= 1 %}membre{% else %}membres{% endif %}</span>&nbsp;
                         <span title="Créée le {{ family.date|date("d/m/Y") }}"><i class="fas fa-calendar-alt"></i>&nbsp;{{ family.date|date("d/m/Y") }}</span>
                     </small>
                 </p>
                 <h5 class="card-title">{{ family.name }}</h5>
 
                 <p class="card-text">
-                    <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#leaveFamily{{ family.id }}" title="Quitter"><i class="fas fa-sign-out-alt"></i>&nbsp;Quitter</button>
+                    Code : {{ family.code }}
                     <!-- Modal -->
                     {{  include('inc/modal.html.twig', {'id_modal' : 'leaveFamily' ~ family.id,'title' : 'Quitter cette famille', 'route' : path('family_leave', {'id': family.id})}) }}
+                    <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#leaveFamily{{ family.id }}" title="Quitter"><i class="fas fa-sign-out-alt"></i>&nbsp;Quitter</button>
                     {% if app.session.get('family').id != family.id %}
                     <a href="{{ path('family_connect', {'id': family.id}) }}" title="Se connecter"><button type="button" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i>&nbsp;Se connecter</button></a>
                     {% endif %}

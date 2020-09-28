@@ -9,7 +9,7 @@
     {% endif %}
 {% elseif cur_path in ['member_list', 'member_show', 'idea_show'] %}
     {% set actif = 'other_members' %}
-{% elseif cur_path in ['family_list', 'family_join'] %}
+{% elseif cur_path in ['family_list', 'family_new', 'family_join'] %}
     {% set actif = 'family_list' %}
 {% elseif cur_path in ['member_shopping_list'] %}
     {% set actif = 'my_shopping_list' %}

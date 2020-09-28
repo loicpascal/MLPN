@@ -58,7 +58,9 @@ class FamilyController extends AbstractController
             $em->persist($family);
             $em->flush();
 
-            $this->addFlash('success', 'La famille a bien été créée.');
+            $this->session->set('family', $family);
+
+            $this->addFlash('success', 'La famille <b>' . $family->getName() . '</b> a bien été créée.');
 
             return $this->redirectToRoute('member_list');
         }
@@ -103,7 +105,7 @@ class FamilyController extends AbstractController
     /**
      * @Route("/family/{id}/delete", methods={"GET"}, name="family_delete", requirements={"id"="\d+"})
      */
-    public function deleteAction(Family $family)
+    public function deleteAction(Family $family, SessionInterface $session)
     {
         if (! $family) {
             throw $this->createNotFoundException('Aucune famille trouvée pour l\'identifiant.');
@@ -118,7 +120,14 @@ class FamilyController extends AbstractController
         $em->remove($family);
         $em->flush();
 
-        $this->addFlash('success', 'La famille a bien été supprimée.');
+        $member = $this->getDoctrine()->getRepository(Member::class)->find($this->getUser()->getId());
+        $userFamilies = $member->getFamilies();
+
+        if ($userFamilies[0]) {
+            $session->set('family', $userFamilies[0]);
+        }
+
+        $this->addFlash('success', 'La famille <b>' . $family->getName() . '</b> a bien été supprimée.');
 
         return $this->redirectToRoute('family_list');
     }
@@ -193,7 +202,6 @@ class FamilyController extends AbstractController
 
         if ($userFamilies[0]) {
             $session->set('family', $userFamilies[0]);
-            return $this->redirectToRoute('member_list');
         }
 
         $this->addFlash('success', 'Vous ne faites plus partie de la famille <b>' . $family->getName() . '</b>.');
