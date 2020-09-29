@@ -77,16 +77,6 @@
                     </li>
                 </ul>
 
-                {% else %}
-                <ul class="navbar-nav mr-auto">
-                </ul>
-                    <form method="post" action="{{ path('app_login') }}" class="form-inline my-2 my-lg-0">
-                        <input placeholder="Adresse email" type="email" name="email" class="form-control mr-sm-2" required autofocus>
-                        <input placeholder="Mot de passe" type="password" name="password" class="form-control mr-sm-2" required>
-                        <button class="btn btn-outline-success my-2 my-sm-0 btn-primary" type="submit">Connexion</button>
-
-                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                    </form>
                 {% endif %}
             </div>
         </div>
