@@ -29,6 +29,21 @@ body > .container {
     margin-bottom: 40px;
 }
 
+body.home .form-login {
+    border-radius: 1.5rem;
+    box-shadow: 0 3px 6px 1px rgba(0,0,0,0.12);
+    padding: 2rem;
+}
+
+body.home .form-login .form-control {
+    border: none;
+    border-bottom: 1px solid #ced4da;
+}
+
+body.home .form-login small {
+    text-align: right;
+}
+
 main, .row {
     z-index: 3;
 }
@@ -290,7 +305,6 @@ code {
 }
 
 .footer {
-    margin-bottom: 35px;
     background-color: #214517
 }
 
