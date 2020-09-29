@@ -21,7 +21,7 @@ class MailService
     private $subject = '';
     private $html = '';
 
-    const EMAIL_FROM = 'nepasrepondre@loic-pascal.f';
+    const EMAIL_FROM = 'nepasrepondre@malettreauperenoel.fr';
 
     public function __construct(MailerInterface $mailer) {
         $this->mailer = $mailer;
@@ -55,7 +55,7 @@ class MailService
         }
 
         // Todo : Corriger le MAILER_DSN du .env pour pouvoir envoyer les mails
-//        $this->mailer->send($email);
+        $this->mailer->send($email);
     }
 
     public function getFrom(): string
