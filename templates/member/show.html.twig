@@ -60,9 +60,9 @@
 
                     {% if (idea.memberAdding.id is defined) and (idea.memberAdding.id == app.user.id) %}
                         <a href="{{ path('idea_update', {'id': idea.id}) }}" title="Modifier"><button type="button" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i></button></a>
-                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteIdea{{ idea.id }}" title="Supprimer"><i class="fas fa-trash-alt"></i></button>
+                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#idea_delete{{ idea.id }}" title="Supprimer"><i class="fas fa-trash-alt"></i></button>
                         <!-- Modal -->
-                        {{  include('inc/modal.html.twig', {'id_modal' : 'delete_idea' ~ idea.id,'title' : 'Supprimer cette idée', 'route' : path('idea_delete', {'id': idea.id})}) }}
+                        {{  include('inc/modal.html.twig', {'id_modal' : 'idea_delete' ~ idea.id,'title' : 'Supprimer cette idée', 'route' : path('idea_delete', {'id': idea.id})}) }}
                     {% endif %}
                 </p>
             </div>
