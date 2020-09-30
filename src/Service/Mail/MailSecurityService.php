@@ -20,7 +20,9 @@ class MailSecurityService extends MailService
         $body .= "Cliquez sur le lien suivant ou copiez-le dans votre navigateur afin de redéfinir votre mot de passe : " . $link . "</b>.";
         $body .= '<p>À bientôt sur votre site !<br><a href="' . $urlSite . '">' . $request->getHttpHost() . '</a></p>';
 
-        $this->setFrom(MailService::EMAIL_FROM);
+        // todo: remplacer par MailService::EMAIL_FROM
+//        $this->setFrom(MailService::EMAIL_FROM);
+        $this->setFrom('loic.pascal@gmail.com');
         $this->setTo($member->getEmail());
         $this->setHtml($body);
 
