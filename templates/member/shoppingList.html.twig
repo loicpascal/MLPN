@@ -7,7 +7,7 @@
 
     <div class="listeCadeau">
         {% if not ideas %}
-            <div class="alert alert-warning">Vous n'avez aucune idée dans votre liste d'achats.</div>
+            <div class="alert alert-warning">{{ 'You have no idea in your shopping list.'|trans }}</div>
         {% else %}
             {% for idea in ideas %}
                 <div class="card">

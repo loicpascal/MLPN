@@ -172,7 +172,7 @@ class FamilyController extends AbstractController
         }
         return $this->render('family/join.html.twig', [
             'form' => $form->createView(),
-            'breadcrumb' => [$this->generateUrl('family_list') => 'Mes familles', '' => 'Joindre une famille']
+            'breadcrumb' => [$this->generateUrl('family_list') => 'Mes familles', '' => 'Rejoindre une famille']
         ]);
     }
 

@@ -15,9 +15,9 @@
         {% if not ideas %}
         <p class="alert alert-warning">
             {% if archived is defined %}
-            <span>Vous n'avez aucune idée archivée.</span>
+            <spans>{% trans %}You have no idea archived.{% endtrans %}</spans>
             {% else %}
-            Vous n'avez aucune idée de cadeau.<br>
+            {% trans %}You have no idea for a gift.{% endtrans %}<br><br>
             <a href="{{ path('idea_new') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>&nbsp;Ajouter une idée</a>
             {% endif %}
         </p>
