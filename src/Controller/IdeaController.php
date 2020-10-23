@@ -47,10 +47,10 @@ class IdeaController extends AbstractController
 
         if (is_null($member_id)) {
             $member = $this->getUser();
-            $breadcrumb = [$this->generateUrl('idea_list') => 'Mes idées', '' => 'Nouvelle idée'];
+            $breadcrumb = [$this->generateUrl('idea_list') => 'Mes idées', '' => 'Ajouter une idée'];
         } else {
             $member = $this->getDoctrine()->getRepository(Member::class)->find($member_id);
-            $breadcrumb = [$this->generateUrl('member_list') => 'Membres', '' => 'Nouvelle idée pour ' . $member->getFirstname()];
+            $breadcrumb = [$this->generateUrl('member_list') => 'Membres', '' => 'Ajouter une idée pour ' . $member->getFirstname()];
         }
 
         $form = $this->createForm(IdeaType::class, $idea);
@@ -162,10 +162,24 @@ class IdeaController extends AbstractController
             return $this->redirectToRoute('idea_list');
         }
 
+        $member = $idea->getMember();
+        if ($member->getId() === $this->getUser()->getId()) {
+            $breadcrum = [
+                $this->generateUrl('idea_list') => 'Mes idées',
+                '' => $idea->getTitle()
+            ];
+        } else {
+            $breadcrum = [
+                $this->generateUrl('member_list') => 'Membres',
+                $this->generateUrl('member_show', ['id' => $member->getId()]) => $member->getFirstname(),
+                '' => $idea->getTitle()
+            ];
+        }
+
         return $this->render('idea/update.html.twig', [
             'form' => $form->createView(),
             'formComment' => $formComment->createView(),
-            'breadcrumb' => [$this->generateUrl('idea_list') => 'Mes idées', '' => $idea->getTitle()],
+            'breadcrumb' => $breadcrum,
             'idea' => $idea
         ]);
     }

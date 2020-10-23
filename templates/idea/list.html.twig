@@ -8,7 +8,7 @@
     {% endif %}
 
     {% if archived is not defined %}
-        <p class="float-right"><a href="{{ path('idea_new') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>&nbsp;Ajouter une idée pour moi</a></p>
+        <p class="float-right"><a href="{{ path('idea_new') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>&nbsp;Ajouter ma première idée</a></p>
     {% endif %}
 {% endblock %}
 
@@ -17,10 +17,9 @@
     <div>
         {% if not ideas %}
             {% if archived is defined %}
-            <spans>{% trans %}You have no idea archived.{% endtrans %}</spans>
+            <span><i class="fas fa-info-circle"></i>&nbsp;{% trans %}You have no idea archived.{% endtrans %}</span>
             {% else %}
-            {% trans %}You have no idea for a gift.{% endtrans %}<br><br>
-            <a href="{{ path('idea_new') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>&nbsp;Ajouter une idée pour moi</a>
+            <span><i class="fas fa-info-circle"></i>&nbsp;{% trans %}You have no idea for a gift.{% endtrans %}</span><br><br>
             {% endif %}
         {% else %}
 

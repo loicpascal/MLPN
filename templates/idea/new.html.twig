@@ -1,9 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() }} Nouvelle idée{% endblock %}
-{% block h1 %}Nouvelle idée {% if member is not null %}pour {{ member.firstname }}{% endif %}{% endblock %}
+{% block title %}{{ parent() }} Ajouter une idée{% endblock %}
+{% block h1 %}Ajouter une idée pour {% if app.user.id == member.id %}moi{% else %}{{ member.firstname }}{% endif %}{% endblock %}
 
 {% block body %}
+
+        <div class="alert alert-light" role="alert">
+            <i class="fas fa-info-circle"></i>&nbsp;
+            {% if app.user.id != member.id %}
+                Cette idée ne sera pas visible par {{ member.firstname }}, seuls vous et les autres membres de la famille <b>{{ app.session.get('family').name }}</b> pourront la voir.
+            {% else %}
+                Cette idée sera visible par tous les membres de la famille <b>{{ app.session.get('family').name }}</b>.
+            {% endif %}
+        </div>
 
     <div>
         {{ form_start(form) }}
