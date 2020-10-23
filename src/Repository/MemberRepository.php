@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Member;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
@@ -44,7 +45,7 @@ class MemberRepository extends ServiceEntityRepository implements PasswordUpgrad
         $query = $this->createQueryBuilder('m')
             ->innerJoin('m.families', 'f')
             ->andWhere('f.id = :family_id')
-            ->setParameter('family_id', $familyId)
+            ->setParameter('family_id', $familyId, Types::INTEGER)
             ->orderBy('m.firstname', 'ASC')
             ->getQuery();
         return $query->getResult();

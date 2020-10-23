@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Family;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -27,7 +28,7 @@ class FamilyRepository extends ServiceEntityRepository
         $query = $this->createQueryBuilder('f')
             ->innerJoin('f.members', 'm')
             ->andWhere('m.id = :id')
-            ->setParameter('id', $id)
+            ->setParameter('id', $id, Types::INTEGER)
             ->orderBy('f.name', 'ASC')
             ->getQuery();
         return $query->getResult();
@@ -43,8 +44,8 @@ class FamilyRepository extends ServiceEntityRepository
             ->innerJoin('f.members', 'm')
             ->andWhere('f.code = :code')
             ->andWhere('m.id = :id')
-            ->setParameter('code', $code)
-            ->setParameter('id', $id)
+            ->setParameter('code', $code, Types::STRING)
+            ->setParameter('id', $id, Types::INTEGER)
             ->orderBy('f.name', 'ASC')
             ->getQuery();
         return $query->getResult();
@@ -71,7 +72,7 @@ class FamilyRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('f')
             ->andWhere('f.code = :val')
-            ->setParameter('val', $value)
+            ->setParameter('val', $value, Types::STRING)
             ->getQuery()
             ->getOneOrNullResult()
         ;

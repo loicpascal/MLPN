@@ -3,7 +3,7 @@ mlpn = {
     // Initialisation du site
     init: function()
     {
-        // Initialisation des éléments Boostrap tooltip
+        this.initCopyToClipboard();
         // this.initBootstrapModalIntroduction();
         // this.initModalIntroductionCarousel();
     },
@@ -27,5 +27,12 @@ mlpn = {
         let carouselElement = $('#carouselModalIntroduction');
         carouselElement.carousel();
         carouselElement.carousel('pause');
+    },
+
+    initCopyToClipboard: function() {
+        $('.copy-to-clipboard-button').on('click', function () {
+            navigator.clipboard.writeText($(this).data('link'));
+            $(this).html('Copié !');
+        });
     }
 };

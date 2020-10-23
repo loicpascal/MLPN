@@ -13,11 +13,9 @@
 
 <div>
     {% if not families %}
-    <p class="alert alert-warning">
         {{ 'You are not attached to any family.'|trans }}<br><br>
         <a href="{{ path('family_new') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>&nbsp;{{ 'Create family'|trans }}</a>
         <a href="{{ path('family_join') }}" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>&nbsp;{{ 'Join family'|trans }}</a>
-    </p>
     {% else %}
 
     <div class="listeCadeau">
@@ -33,7 +31,9 @@
                 <h5 class="card-title">{{ family.name }}</h5>
 
                 <p class="card-text">
-                    Code : {{ family.code }}
+                    <span>
+                        Code : {{ family.code }} <span class="badge badge-light copy-to-clipboard-button" data-link="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ path('family_join_code', {'code' : family.code}) }}">Copier le lien de partage</span><br>
+                    </span>
                     <!-- Modal -->
                     {{  include('inc/modal.html.twig', {'id_modal' : 'leaveFamily' ~ family.id,'title' : 'Quitter cette famille', 'route' : path('family_leave', {'id': family.id})}) }}
                     <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#leaveFamily{{ family.id }}" title="Quitter"><i class="fas fa-sign-out-alt"></i>&nbsp;Quitter</button>
@@ -43,8 +43,7 @@
 
                     {% if family.member.id == app.user.id %}
                     <a href="{{ path('family_update', {'id': family.id}) }}" title="Modifier"><button type="button" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i>&nbsp;Modifier</button></a>
-                        {% if family.members %}
-                        {# todo: corriger family.members qui ne renvoient rien #}
+                        {% if family.members|length <= 1 %}
                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteFamily{{ family.id }}" title="Supprimer"><i class="fas fa-trash-alt"></i></button>
                         <!-- Modal -->
                         {{  include('inc/modal.html.twig', {'id_modal' : 'deleteFamily' ~ family.id,'title' : 'Supprimer cette famille', 'route' : path('family_delete', {'id': family.id})}) }}

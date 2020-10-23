@@ -177,6 +177,33 @@ class FamilyController extends AbstractController
     }
 
     /**
+     * @Route("/family/join/{code}", name="family_join_code")
+     */
+    public function joinHashAction(Request $request, $code)
+    {
+        if (strlen($code) !== 128) {
+            throw $this->createNotFoundException('Paramètre incorrecte');
+        }
+
+        $family = $this->getDoctrine()->getRepository(Family::class)->findOneBy(['code' => $code]);
+
+        if (! $family) {
+            throw $this->createNotFoundException('Aucune famille correspondante');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $family->addMember($this->getUser());
+        $em->persist($family);
+        $em->flush();
+
+        $this->session->set('family', $family);
+
+        $this->addFlash('success', 'Vous faites maintenant partie de la famille <b>' . $family->getName() . '</b>.');
+
+        return $this->redirectToRoute('member_list');
+    }
+
+    /**
      * @Route("/family/{id}/leave", name="family_leave")
      */
     public function leaveAction(Family $family, SessionInterface $session)

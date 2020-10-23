@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Idea;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -25,8 +26,8 @@ class IdeaRepository extends ServiceEntityRepository
             ->innerJoin('i.member', 'm')
             ->where('i.member_taking = :member_taking')
             ->andWhere('i.archived = :archived')
-            ->setParameter('member_taking', $member_id)
-            ->setParameter('archived', $archived)
+            ->setParameter('member_taking', $member_id, Types::INTEGER)
+            ->setParameter('archived', $archived, Types::BOOLEAN)
             ->orderBy('m.firstname')
             ->getQuery()
             ->getResult();

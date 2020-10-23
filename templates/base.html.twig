@@ -13,7 +13,7 @@
 
         <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     </head>
-    <body class="{% block body_class %}{% endblock %}">
+    <body class="{% if app.user %}connected{% endif %} {% block body_class %}{% endblock %}">
 
         {{ include('layout/header.html.twig') }}
 

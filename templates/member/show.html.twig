@@ -1,9 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ parent() }} {{ member.fullname }}{% endblock %}
-{% block h1 %}{{ member.firstname }} <span class="badge badge-primary">{{ ideas|length }}</span>{% endblock %}
+{% block h1 %}{{ member.firstname }}
+    <span class="badge badge-primary">{{ ideas|length }}</span>
+    <p class="float-right"><a href="{{ path('idea_new', {'member_id': member.id}) }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>&nbsp;Ajouter une idée pour {{ member.firstname }}</a></p>
+{% endblock %}
 
 {% block body %}
+
 
 <div class="listeCadeau">
     {% for idea in ideas %}
@@ -19,7 +23,7 @@
                 </p>
 
                 <h5 class="card-title">
-{#                    <img class="cadeau" src="{{ asset('images/cadeau.png') }}" alt="">#}
+                    <img class="cadeau" src="{{ asset('images/cadeau.png') }}" alt="">
                     <a href="{{ path('idea_show', {'id' : idea.id}) }}">{{ idea.title }}</a>
                 </h5>
 
@@ -33,20 +37,24 @@
 
                 <p class="card-text">
                     {% if idea.state == 0 %}
-                        <a href="{{ path('idea_state_update_to_take', {'id': idea.id, 'member_id': idea.member.id}) }}"><button type="button" class="btn btn-primary btn-sm"><i class="fas fa-cart-arrow-down"></i>&nbsp;Je prends</button></a>
-                    {% elseif idea.state == 1 %} {# J'ai pris #}
+                        {# Disponible #}
+                        <a href="{{ path('idea_state_update_to_take', {'id': idea.id, 'member_id': idea.member.id}) }}"><button type="button" class="btn btn-primary btn-sm"><i class="fas fa-cart-arrow-down"></i>&nbsp;Placer dans ma hotte</button></a>
+                    {% elseif idea.state == 1 %}
+                        {# En cours #}
                         {% if idea.memberTaking.id == app.user.id %}
-                            <a href="{{ path('idea_state_update_taken', {'id': idea.id, 'member_id': idea.member.id}) }}"><button type="button" class="btn btn-success btn-sm">J'ai pris</button></a>
-                            <a href="{{ path('idea_state_cancel_to_take', {'id': idea.id, 'member_id': idea.member.id}) }}"><button type="button" class="btn btn-warning btn-sm">Je ne prends plus</button></a>
+                            <a href="{{ path('idea_state_update_taken', {'id': idea.id, 'member_id': idea.member.id}) }}"><button type="button" class="btn btn-primary btn-sm">J'ai pris</button></a>
+                            <a href="{{ path('idea_state_cancel_to_take', {'id': idea.id, 'member_id': idea.member.id}) }}"><button type="button" class="btn btn-primary btn-sm">Finalement non</button></a>
                         {% else %}
-                            <span class="text-success">En cours par un autre membre</span>
+                            <button type="button" class="btn btn-primary btn-sm" disabled><i class="fas fa-lock"></i>&nbsp;Dans la hotte d'un autre membre</button>
                         {% endif %}
                     {% elseif idea.state == 2 %}
-                        <div class="alert alert-success" role="alert">Pris {% if idea.memberTaking.id != app.user.id %} par un autre membre{% else %} par vous{% endif %} !
-                        {% if idea.memberTaking.id == app.user.id %}
-                            <a href="{{ path('idea_state_cancel_to_take', {'id': idea.id, 'member_id': idea.member.id}) }}" class="badge badge-danger">Annuler</a>
-                        {% endif %}
-                        </div>
+                        {# Prise #}
+                        <button type="button" class="btn btn-primary btn-sm" disabled>
+                            <i class="fas fa-lock"></i>&nbsp;Achetée {% if idea.memberTaking.id != app.user.id %}par un autre membre{% else %}par vous{% endif %}
+                            {% if idea.memberTaking.id == app.user.id %}
+                                <a href="{{ path('idea_state_cancel_to_take', {'id': idea.id, 'member_id': idea.member.id}) }}" class="badge badge-danger">Annuler</a>
+                            {% endif %}
+                        </button>
                     {% endif %}
 
                     <a href="{{ path('idea_show', {'id' : idea.id}) }}">
@@ -70,17 +78,16 @@
     {% endfor %}
 
 </div>
-<a href="{{ path('idea_new', {'member_id': member.id}) }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>&nbsp;Ajouter une idée</a>
 
 <br><br>
-<div class="card">
+<div class="card card-help">
     <div class="card-header"><i class="fas fa-info-circle"></i>&nbsp;Aide</div>
     <div class="card-body">
         <ul>
             <li>Cliquez sur <button type="button" class="btn btn-primary btn-sm"><i class="fas fa-cart-arrow-down"></i>&nbsp;Je prends</button> pour indiquer que vous comptez prendre le cadeau.</li>
-            <li>Cliquez sur <button type="button" class="btn btn-success btn-sm">J'ai pris</button> pour indiquer que vous avez pris le cadeau.</li>
-            <li>Cliquez sur <button type="button" class="btn btn-warning btn-sm">Je ne prends plus</button> pour indiquer que vous ne prenez plus le cadeau.</li>
-            <li><span class="text-success">"En cours par un autre membre"</span> indique qu'un autre membre s'occupe de ce cadeau.</li>
+            <li>Cliquez sur <button type="button" class="btn btn-primary btn-sm">J'ai pris</button> pour indiquer que vous avez pris le cadeau.</li>
+            <li>Cliquez sur <button type="button" class="btn btn-primary btn-sm">Finalement non</button> pour indiquer que vous ne prenez plus le cadeau.</li>
+            <li><button type="button" class="btn btn-primary btn-sm" disabled><i class="fas fa-lock"></i></button> indique qu'un autre membre s'occupe de ce cadeau.</li>
         </ul>
     </div>
 </div>

@@ -6,27 +6,23 @@
     {% if ideas %}
     <span class="badge badge-primary">{{ ideas|length }}</span>
     {% endif %}
+
+    {% if archived is not defined %}
+        <p class="float-right"><a href="{{ path('idea_new') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>&nbsp;Ajouter une idée pour moi</a></p>
+    {% endif %}
 {% endblock %}
 
 {% block body %}
 
-
     <div>
         {% if not ideas %}
-        <p class="alert alert-warning">
             {% if archived is defined %}
             <spans>{% trans %}You have no idea archived.{% endtrans %}</spans>
             {% else %}
             {% trans %}You have no idea for a gift.{% endtrans %}<br><br>
-            <a href="{{ path('idea_new') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>&nbsp;Ajouter une idée</a>
+            <a href="{{ path('idea_new') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>&nbsp;Ajouter une idée pour moi</a>
             {% endif %}
-        </p>
         {% else %}
-
-        {% if archived is not defined %}
-        <a href="{{ path('idea_new') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>&nbsp;Ajouter une idée</a>
-        <br><br>
-        {% endif %}
 
         <div class="listeCadeau">
             {% for idea in ideas %}
@@ -37,7 +33,10 @@
                             <span title="Ajoutée le {{ idea.date|date("d/m/Y") }}"><i class="fas fa-calendar-alt"></i>&nbsp;{{ idea.date|date("d/m/Y") }}</span>
                         </small>
                     </p>
-                    <h5 class="card-title">{{ idea.title }}</h5>
+                    <h5 class="card-title">
+                        <img class="cadeau" src="{{ asset('images/cadeau.png') }}" alt="">
+                        <a href="{{ path('idea_update', {'id' : idea.id}) }}">{{ idea.title }}</a>
+                    </h5>
 
                     {% if idea.description %}
                     <p class="card-text">{{ idea.description|nl2br }}</p>
@@ -50,26 +49,26 @@
                     <p class="card-text">
 
                         {% if archived is not defined %}
-                        <a href="{{ path('idea_update', {'id': idea.id}) }}" title="Modifier"><button type="button" class="btn btn-info btn-sm"><i class="fas fa-pencil-alt"></i>&nbsp;Modifier</button></a>
+                        <a type="button" class="btn btn-info btn-sm" href="{{ path('idea_update', {'id': idea.id}) }}" title="Modifier">
+                            <i class="fas fa-pencil-alt"></i>&nbsp;Modifier
+                        </a>
                         {% endif %}
 
                         {% if idea.comments|length %}
-                        <a href="{{ path('idea_update', {'id' : idea.id}) }}">
-                            <button type="button" class="btn btn-info btn-sm">
-                                <i class="fas fa-comments"></i>&nbsp;
-                                    {% if idea.comments|length == 0 %}Commenter{% elseif idea.comments|length == 1 %}Commentaire{% elseif idea.comments|length > 1 %}Commentaires{% endif %}
-                                    &nbsp;<span class="badge badge-light">{{ idea.comments|length }}</span>
-                            </button>
+                        <a type="button" class="btn btn-info btn-sm" href="{{ path('idea_update', {'id' : idea.id}) }}">
+                            <i class="fas fa-comments"></i>&nbsp;
+                            {% if idea.comments|length == 0 %}Commenter{% elseif idea.comments|length == 1 %}Commentaire{% elseif idea.comments|length > 1 %}Commentaires{% endif %}
+                            &nbsp;<span class="badge badge-light">{{ idea.comments|length }}</span>
                         </a>
                         {% endif %}
 
                         {% if idea.archived %}
-                            <a href="{{ path('idea_unarchive', {'id': idea.id}) }}" title="Désarchiver"><button type="button" class="btn btn-info btn-sm"><i class="fas fa-archive"></i>&nbsp;Désarchiver</button></a>
+                            <a type="button" class="btn btn-info btn-sm" href="{{ path('idea_unarchive', {'id': idea.id}) }}" title="Désarchiver">
+                                <i class="fas fa-archive"></i>&nbsp;Désarchiver
+                            </a>
                         {%  else %}
-                            <a href="{{ path('idea_archive', {'id': idea.id}) }}" title="Archiver">
-                                <button type="button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="bottom" title="Vous pourrez la désarchiver plus tard">
-                                    <i class="fas fa-archive"></i>&nbsp;Archiver
-                                </button>
+                            <a type="button" class="btn btn-info btn-sm" href="{{ path('idea_archive', {'id': idea.id}) }}" title="Archiver">
+                                <i class="fas fa-archive"></i>&nbsp;Archiver
                             </a>
                         {% endif %}
                         <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteIdea{{ idea.id }}" title="Supprimer"><i class="fas fa-trash-alt"></i></button>
@@ -80,8 +79,6 @@
             </div>
             {% endfor %}
         </div>
-
-        <a href="{{ path('idea_new') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i>&nbsp;Ajouter une idée</a>
 
         <button type="button" class="btn btn-link" data-toggle="modal" data-target="#deleteAllIdeas">Supprimer toutes mes idées</button>
 

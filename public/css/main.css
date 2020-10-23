@@ -83,16 +83,26 @@ h1 {
  * NAVIGATION - MENU
  */
 .bg-dark {
-    background-color: #527A47 !important;
+
+    /*background-color: #527A47 !important;*/
+    background-color: #577C5D !important;
 }
 
 .dropdown-menu {
-    background: #527A47;
+    /*background-color: #527A47;*/
+
+    background-color: #577C5D;
     color: rgba(255,255,255,.5);
 }
 
 .dropdown-item {
     color: rgba(255,255,255,.5);
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+    background-color: #f8f9fa;
+    color: #16181b;
 }
 
 /**
@@ -161,6 +171,10 @@ form .form-control:focus {
     padding: .5rem 1rem;
 }
 
+.btn.focus, .btn:focus {
+    box-shadow: none;
+}
+
 .btn-primary {
     background-color: #e5ac9d;
     border-color: #e5ac9d;
@@ -222,6 +236,10 @@ a:hover, .btn-link:hover {
     color: #c07a68;
 }
 
+a.backlink {
+    margin-left: 10px;
+}
+
 /**
  * BADGES
  */
@@ -248,6 +266,11 @@ a:hover, .btn-link:hover {
 .listeCadeau .card .btn-danger {
     padding: .5rem 0.8rem;
     float: right;
+}
+
+/* FAMILY - LIST */
+.copy-to-clipboard-button {
+    cursor: pointer;
 }
 
 a.external::before {
@@ -301,6 +324,14 @@ code {
     font-size: 80%;
 }
 
+.card.card-help button.btn {
+    padding: 0.2rem 0.5rem;
+}
+
+.card.card-help ul > li {
+    margin-bottom: 0.2rem;
+}
+
 /**
  * FOOTER
  */
@@ -309,7 +340,8 @@ code {
     position: absolute;
     bottom: 0;
     width: 100%;
-    background-color: #527A47;
+    /*background-color: #527A47;*/
+    background-color: #577C5D;
     color: rgba(255,255,255,.75);
     line-height: 40px;
 }
@@ -329,15 +361,27 @@ code {
 
 .footer #logoFooter {
     height: 20px;
-    vertical-align: baseline;
+    vertical-align: text-bottom;
 }
 
 /*******************************************
 ** MEDIA QUERIES
  *******************************************/
-@media (max-width: 767.98px) {
+@media only screen and (max-width: 767px) {
+    .connected header .navbar .navbar-brand {
+        display: none;
+    }
+
     #logo {
         margin-right: 5px;
+    }
+
+    main.container {
+        margin-bottom: 140px;
+    }
+
+    body.home .form-login {
+        margin: 0 20px;
     }
 
     .listeCadeau .card {

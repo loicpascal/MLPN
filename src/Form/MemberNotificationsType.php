@@ -15,7 +15,7 @@ class MemberNotificationsType extends AbstractType
     {
         $builder
             ->add('receive_email_new_comment', CheckboxType::class, [
-                'label' => 'Je veux être informé par mail lorsqu\'un membre ajoute un commentaire sur l\'une de mes idées',
+                'label' => 'Je veux être informé·e par mail lorsqu\'un membre ajoute un commentaire sur l\'une de mes idées',
                 'required' => false
             ])
             ->add('save', SubmitType::class, ['label' => 'Modifier']);
