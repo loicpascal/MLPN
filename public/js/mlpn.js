@@ -31,8 +31,14 @@ mlpn = {
 
     initCopyToClipboard: function() {
         $('.copy-to-clipboard-button').on('click', function () {
+            let button = $(this);
             navigator.clipboard.writeText($(this).data('link'));
-            $(this).html('Copié !');
+            let buttonContentBefore = button.html();
+            button.html('Copié !');
+            setTimeout(
+                function () { button.html(buttonContentBefore); },
+                2000
+            );
         });
     }
 };

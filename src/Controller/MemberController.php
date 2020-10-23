@@ -23,6 +23,10 @@ class MemberController extends AbstractController
     public function listAction(SessionInterface $session)
     {
         // Tests faits à la connexion
+        if ($code = $session->remove('family_code')) {
+            return $this->redirectToRoute('family_join_code', ['code' => $code]);
+        }
+
         if (! $session->get('family')) {
             $member = $this->getDoctrine()->getRepository(Member::class)->find($this->getUser()->getId());
             $userFamilies = $member->getFamilies();

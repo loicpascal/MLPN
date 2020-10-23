@@ -179,9 +179,14 @@ class FamilyController extends AbstractController
     /**
      * @Route("/family/join/{code}", name="family_join_code")
      */
-    public function joinHashAction(Request $request, $code)
+    public function joinHashAction($code)
     {
-        if (strlen($code) !== 128) {
+        if (! $this->getUser()) {
+            $this->session->set('family_code', $code);
+            return $this->redirectToRoute('home');
+        }
+
+        if (strlen($code) !== 8) {
             throw $this->createNotFoundException('Paramètre incorrecte');
         }
 

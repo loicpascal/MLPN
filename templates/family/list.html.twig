@@ -32,7 +32,8 @@
 
                 <p class="card-text">
                     <span>
-                        Code : {{ family.code }} <span class="badge badge-light copy-to-clipboard-button" data-link="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ path('family_join_code', {'code' : family.code}) }}">Copier le lien de partage</span><br>
+                        Code : {{ family.code }}<br>
+                        <span class="badge badge-light copy-to-clipboard-button" data-link="{{ app.request.scheme ~'://' ~ app.request.httpHost ~ path('family_join_code', {'code' : family.code}) }}">Copier le lien de partage</span><br>
                     </span>
                     <!-- Modal -->
                     {{  include('inc/modal.html.twig', {'id_modal' : 'leaveFamily' ~ family.id,'title' : 'Quitter cette famille', 'route' : path('family_leave', {'id': family.id})}) }}
