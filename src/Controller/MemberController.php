@@ -115,26 +115,22 @@ class MemberController extends AbstractController
     }
 
     /**
-     * @Route("/member/{id}/update", name="member_update", requirements={"id"="\d+"})
+     * @Route("/account", name="my_account")
      */
-    public function updateAction(Member $member)
+    public function updateAction()
     {
-        if (! $member || $member->getEmail() !== $this->getUser()->getUsername()) {
-            return $this->redirectToRoute('member_list');
-        }
-
-        $formInfos = $this->createForm(MemberInfosType::class, $member, [
-            'action' => $this->generateUrl('member_update_infos', ['id' => $member->getId()])
+        $formInfos = $this->createForm(MemberInfosType::class, $this->getUser(), [
+            'action' => $this->generateUrl('member_update_infos', ['id' => $this->getUser()->getId()])
         ]);
-        $formNotifications = $this->createForm(MemberNotificationsType::class, $member, [
-            'action' => $this->generateUrl('member_update_notifications', ['id' => $member->getId()])
+        $formNotifications = $this->createForm(MemberNotificationsType::class, $this->getUser(), [
+            'action' => $this->generateUrl('member_update_notifications', ['id' => $this->getUser()->getId()])
         ]);
-        $formPwd = $this->createForm(MemberPwdType::class, $member, [
-            'action' => $this->generateUrl('member_update_password', ['id' => $member->getId()])
+        $formPwd = $this->createForm(MemberPwdType::class, $this->getUser(), [
+            'action' => $this->generateUrl('member_update_password', ['id' => $this->getUser()->getId()])
         ]);
 
         return $this->render('member/update.html.twig', [
-            'member' => $member,
+            'member' => $this->getUser(),
             'formInfos' => $formInfos->createView(),
             'formNotifications' => $formNotifications->createView(),
             'formPwd' => $formPwd->createView()
@@ -169,7 +165,7 @@ class MemberController extends AbstractController
             $em->flush();
 
             $this->addFlash('successInfosUpdate', 'Vos informations ont été modifiées avec succès !');
-            return $this->redirectToRoute('member_update', ['id' => $id, 'panel' => 'infos']);
+            return $this->redirectToRoute('my_account', ['panel' => 'infos']);
         }
 
         return $this->render('member/update.html.twig', [
@@ -208,7 +204,7 @@ class MemberController extends AbstractController
             $em->flush();
 
             $this->addFlash('successNotifsUpdate', 'Vos informations ont été modifiées avec succès !');
-            return $this->redirectToRoute('member_update', ['id' => $id, 'panel' => 'notifs']);
+            return $this->redirectToRoute('my_account', ['panel' => 'notifs']);
         }
 
         return $this->render('member/update.html.twig', [
@@ -253,7 +249,7 @@ class MemberController extends AbstractController
 
                 $this->addFlash('successPwdUpdate', 'Votre mot de passe a été modifié avec succès !');
             }
-            return $this->redirectToRoute('member_update', ['id' => $id, 'panel' => 'password']);
+            return $this->redirectToRoute('my_account', ['panel' => 'password']);
         }
 
         return $this->render('member/update.html.twig', [
@@ -277,7 +273,7 @@ class MemberController extends AbstractController
             $member = $this->getUser();
             if (count($member->getIdees())) {
                 $this->addFlash('danger', 'Vous avez des idées. Supprimez d\'abord vos idées pour supprimer votre compte.');
-                return $this->redirectToRoute('member_update', ['id' => $member->getId()]);
+                return $this->redirectToRoute('my_account');
             }
 
             $this->get('security.token_storage')->setToken(null);

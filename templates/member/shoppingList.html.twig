@@ -7,7 +7,7 @@
 
     <div class="listeCadeau">
         {% if not ideas %}
-            {{ 'You have no idea in your shopping list.'|trans }}
+            <span><i class="fas fa-info-circle"></i>&nbsp;{{ 'You have no idea in your shopping list.'|trans }}
         {% else %}
             {% for idea in ideas %}
                 <div class="card">

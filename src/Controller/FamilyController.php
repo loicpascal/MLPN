@@ -196,14 +196,18 @@ class FamilyController extends AbstractController
             throw $this->createNotFoundException('Aucune famille correspondante');
         }
 
-        $em = $this->getDoctrine()->getManager();
-        $family->addMember($this->getUser());
-        $em->persist($family);
-        $em->flush();
+        if ($family->getMembers()->contains($this->getUser())) {
+            $this->addFlash('success', 'Vous faites déjà partie de la famille <b>' . $family->getName() . '</b>.');
+        } else {
+            $em = $this->getDoctrine()->getManager();
+            $family->addMember($this->getUser());
+            $em->persist($family);
+            $em->flush();
+
+            $this->addFlash('success', 'Vous faites maintenant partie de la famille <b>' . $family->getName() . '</b>.');
+        }
 
         $this->session->set('family', $family);
-
-        $this->addFlash('success', 'Vous faites maintenant partie de la famille <b>' . $family->getName() . '</b>.');
 
         return $this->redirectToRoute('member_list');
     }
